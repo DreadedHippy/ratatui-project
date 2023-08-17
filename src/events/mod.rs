@@ -50,7 +50,7 @@ pub fn input_event() -> Option<CustomInput> {
 			if let event::KeyEventKind::Press = key_event.kind {
 				match key_event.code {
 					KeyCode::Char(c) => {
-						if c >= '1' && c <= '8' {
+						if c >= '0' && c <= '9' {
 							return Some(CustomInput::Number(c as usize - '0' as usize))
 						} else {
 							return Some(CustomInput::Char(c))

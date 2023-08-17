@@ -48,6 +48,10 @@ impl Customer {
 			Err(String::from("Unable to update bank account"))
 		}
 	}
+
+    pub fn accounts(&self) -> &[Account] {
+			self.accounts.as_ref()
+    }
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

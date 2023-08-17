@@ -5,6 +5,8 @@ use app::AppInterface;
 
 use crate::utils::CustomText;
 
+use self::app::InputMode;
+
 
 pub fn ui(f: &mut ratatui::Frame<CrosstermBackend<Stdout>>, app: &AppInterface) {
 	let selected = app.tab_display.1;
@@ -26,12 +28,15 @@ pub fn ui(f: &mut ratatui::Frame<CrosstermBackend<Stdout>>, app: &AppInterface) 
 		(chunks[0], chunks[1], chunks[2])
 	};
 
+	// let edit_mode_style = Style::new().bg(Color::Gray);
+	// let normal_mode_style = Style::default();
+
 	
 	let in_output_block = output_block.inner(output_area);
 	let (text_display_area, input_area) = {
 		let chunks = Layout::default()
 			.direction(Direction::Vertical)
-			.constraints([Constraint::Length(1), Constraint::Percentage(50)])
+			.constraints([Constraint::Min(1), Constraint::Length(1)])
 			.split(in_output_block);
 		(chunks[0], chunks[1])
 	};

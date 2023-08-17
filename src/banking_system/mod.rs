@@ -1,7 +1,7 @@
 // use std::io::Write;
 mod models;
 mod utils;
-mod handlers;
+pub mod handlers;
 
 use handlers::Events;
 
@@ -10,10 +10,10 @@ use handlers::Events;
 pub fn start_bank(selection: u8) {
     match selection {
         1 => {
-            Events::new_customer();
+            // Events::new_customer();
         },
         2 => {
-            Events::deposit_money();
+            // Events::deposit_money();
         },
         3 => {
             Events::withdraw_money();
