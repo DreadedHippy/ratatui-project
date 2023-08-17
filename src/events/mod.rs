@@ -10,7 +10,7 @@ macro_rules! ok_or_return_none {
 		}
 	};
 }
-use crossterm::event::{self, Event, KeyCode, KeyEvent};
+use crossterm::event::{self, Event, KeyCode};
 
 use crate::utils::CustomInput;
 /// Check if the user has pressed 'q'. This is where you would handle events. This example just
@@ -64,6 +64,10 @@ pub fn input_event() -> Option<CustomInput> {
 					KeyCode::Backspace => {
 						return Some(CustomInput::Backspace)
 					},
+
+					KeyCode::Enter => {
+						return Some(CustomInput::Enter)
+					}
 
 					KeyCode::Left => {
 						return Some(CustomInput::Left)

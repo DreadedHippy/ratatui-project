@@ -11,8 +11,7 @@ pub fn ui(f: &mut ratatui::Frame<CrosstermBackend<Stdout>>, app: &AppInterface) 
 	let main_block = Block::default().title("Rust Bank").borders(Borders::ALL);
 	let tabs = Interfaces::create_tab(app.tab_display.0.clone(), Some(selected));
 	let output_block = Block::default().title("---------------").title_alignment(Alignment::Center).borders(Borders::ALL);
-	let prompt = app.display_text.join("\n");
-	let prompt_text = CustomText::generate_prompt(&prompt);
+	let prompt_text = CustomText::generate_prompt(&app.display_text);
 	let hint_text = CustomText::generate_hint(&app.hint_text);
 	let input_text = CustomText::generate_input(&app.input);
 
@@ -50,15 +49,15 @@ pub fn ui(f: &mut ratatui::Frame<CrosstermBackend<Stdout>>, app: &AppInterface) 
 pub enum Interfaces {}
 
 impl Interfaces {
-	pub fn paragaph() -> impl Widget {
-		let paragraph = Paragraph::new("This is a different paragraph");
-		paragraph
-	}
+	// pub fn paragaph() -> impl Widget {
+	// 	let paragraph = Paragraph::new("This is a different paragraph");
+	// 	paragraph
+	// }
 
-	pub fn another_paragaph() -> impl Widget {
-		let paragraph = Paragraph::new("This is yet another different paragraph");
-		paragraph
-	}
+	// pub fn another_paragaph() -> impl Widget {
+	// 	let paragraph = Paragraph::new("This is yet another different paragraph");
+	// 	paragraph
+	// }
 
 	pub fn create_tab(tabs: Vec<String>, selected: Option<usize>) -> impl Widget {
 		let selected = selected.unwrap_or_default();

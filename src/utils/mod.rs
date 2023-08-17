@@ -1,5 +1,3 @@
-use std::fmt;
-
 use ratatui::{style::{Style, Color}, text::Text};
 
 pub const TABS: [&str; 8] = [
@@ -36,7 +34,8 @@ pub enum CustomInput {
 	Escape,
 	Backspace,
 	Left,
-	Right
+	Right,
+	Enter
 }
 
 impl CustomInput {

@@ -9,9 +9,10 @@ pub mod utils;
 /// restored to a sane state before exiting. This example does not do that. It also does not handle
 /// events or update the application state. It just draws a greeting and exits when the user
 /// presses 'q'.
+// #[tokio::main]
 fn main() -> Result<()> {
     let mut terminal = ratatui_project::setup_terminal().context("setup failed")?;
-    ratatui_project::run(&mut terminal).context("app loop failed")?;
+    ratatui_project::run(&mut terminal).context("setup failed")?;
     ratatui_project::restore_terminal(&mut terminal).context("restore terminal failed")?;
     Ok(())
 }
