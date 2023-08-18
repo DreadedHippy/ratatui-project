@@ -3,8 +3,6 @@ mod models;
 mod utils;
 pub mod handlers;
 
-use handlers::Events;
-
 
 
 pub fn start_bank(selection: u8) {
@@ -16,19 +14,19 @@ pub fn start_bank(selection: u8) {
             // Events::deposit_money();
         },
         3 => {
-            Events::withdraw_money();
+            // Events::withdraw_money();
         },
         4 => {
-            Events::get_account_balances();
+            // Events::get_account_balances();
         },
         5 => {
-            Events::get_admin_info();
+            // Events::get_admin_info();
         },
         6 => {
-            Events::close_bank_account()
+            // Events::close_bank_account()
         },
         7 => {
-            Events::update_bank_account();
+            // Events::update_bank_account();
         },
         8 => {
             println!("Thank you for banking with us");

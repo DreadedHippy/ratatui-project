@@ -39,11 +39,11 @@ impl Customer {
 		Ok(String::from("Account closed"))
 	}
 
-	pub fn update_account(&mut self, old_account_number: String, new_account_number: String) -> Result<String, String> {
+	pub fn update_account(&mut self, old_account_number: String, new_account_number: String) -> Result<Account, String> {
 		let (chosen_account_index, _) = self.accounts.iter().enumerate().find(|(_, account)| account.account_number == old_account_number).unwrap();
 		let account = self.accounts.get_mut(chosen_account_index).unwrap();
 		if let Ok(_) = account.update(new_account_number){
-			Ok(String::from("Account updated!"))
+			Ok(account.clone())
 		} else {
 			Err(String::from("Unable to update bank account"))
 		}

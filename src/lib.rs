@@ -1,4 +1,4 @@
-use std::{io::{self, Stdout}, sync::Arc};
+use std::io::{self, Stdout};
 mod events;
 mod interfaces;
 mod utils;
@@ -12,7 +12,7 @@ use crossterm::{
 	terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
 
-use ratatui::prelude::*;
+use ratatui::{prelude::*, widgets::ScrollbarState};
 use utils::{TABS, CustomInput};
 
 /// Setup the terminal. This is where you would enable raw mode, enter the alternate screen, and
@@ -47,7 +47,9 @@ pub fn run(terminal: &mut Terminal<CrosstermBackend<Stdout>>) -> Result<()> {
 		is_submitted: None,
 		activity: None,
 		should_quit: false,
-		terminal: None
+		terminal: None,
+		scrollbar_state: ScrollbarState::default(),
+		scroll: 0
 	};
 
 	loop {
@@ -60,28 +62,28 @@ pub fn run(terminal: &mut Terminal<CrosstermBackend<Stdout>>) -> Result<()> {
 							app.select_tab(n-1);
 							match n {
 								1 => {
-									app.display_text = "Would you like to register?".to_string()
+									app.set_display_text("Would you like to register?".to_string()).scroll_to_top()
 								},
 								2 => {
-									app.display_text = "Would you like to deposit money?".to_string()
+									app.set_display_text("Would you like to open an account?".to_string()).scroll_to_top()
 								},
 								3 => {
-									app.display_text = "Would you like to withdraw some money?".to_string()
+									app.set_display_text("Would you like to deposit money?".to_string()).scroll_to_top()
 								},
 								4 => {
-									app.display_text = "Would you like to check your balance?".to_string()
+									app.set_display_text("Would you like to withdraw some money?".to_string()).scroll_to_top()
 								},
 								5 => {
-									app.display_text = "<!ADMIN ONLY> Would you like to see all users?".to_string()
+									app.set_display_text("Would you like to check your balance?".to_string()).scroll_to_top()
 								},
 								6 => {
-									app.display_text = "Would you like to close an account?".to_string()
+									app.set_display_text("<!ADMIN ONLY> Would you like to see all users?".to_string()).scroll_to_top()
 								},
 								7 => {
-									app.display_text = "Would you like to update an account?".to_string()
+									app.set_display_text("Would you like to close an account?".to_string()).scroll_to_top()
 								},
-								8 => {						
-									app.display_text = "Would you like to close exit?".to_string()
+								8 => {
+									app.set_display_text("Would you like to update an account?".to_string()).scroll_to_top()
 								},
 								_ => {}
 							}
@@ -102,6 +104,13 @@ pub fn run(terminal: &mut Terminal<CrosstermBackend<Stdout>>) -> Result<()> {
 							app.display_text = "You have entered edit mode. Press any button to begin typing".to_string();
 							app.set_hint_mode(2)
 							// app.start()
+						},
+
+						CustomInput::Up => {
+							app.scroll('u');
+						},
+						CustomInput::Down => {
+							app.scroll('d');
 						}
 
 						_ => {}

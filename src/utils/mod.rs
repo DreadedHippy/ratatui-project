@@ -2,13 +2,13 @@ use ratatui::{style::{Style, Color}, text::Text};
 
 pub const TABS: [&str; 8] = [
 	"(1) Register",
-	"(2) Deposit",
-	"(3) Withdraw",
-	"(4) Balance",
-	"(5) Admin List",
-	"(6) Close",
-	"(7) Update",
-	"(8) Exit",
+	"(2) Create Account",
+	"(3) Deposit",
+	"(4) Withdraw",
+	"(5) Balance",
+	"(6) User List",
+	"(7) Close",
+	"(8) Update",
 ];
 
 pub enum CustomText {
@@ -33,17 +33,17 @@ pub enum CustomInput {
 	Number(usize),
 	Escape,
 	Backspace,
-	Left,
-	Right,
-	Enter
+	Up,
+	Down,
+	Enter,
 }
 
-impl CustomInput {
-	pub fn inner_value(&self) -> String {
-		match self {
-			CustomInput::Char(c) => c.to_string(),
-			CustomInput::Number(n) => n.to_string(),
-			_ => "".to_string()
-		}
-	}
-}
+// impl CustomInput {
+// 	pub fn inner_value(&self) -> String {
+// 		match self {
+// 			CustomInput::Char(c) => c.to_string(),
+// 			CustomInput::Number(n) => n.to_string(),
+// 			_ => "".to_string()
+// 		}
+// 	}
+// }
